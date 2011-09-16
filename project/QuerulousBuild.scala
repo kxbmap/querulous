@@ -5,21 +5,21 @@ object QuerulousBuild extends Build {
 
   lazy val root = Project(
     "querulous", file("."),
-    settings = standardSettings
-  ) aggregate (core, tracing)
+    settings = rootSettings
+  ) aggregate core
 
   lazy val core = Project(
     "querulous-core", file("querulous-core"),
     settings = coreSettings
   )
 
-  lazy val tracing = Project(
-    "querulous-tracing", file("querulous-tracing"),
-    settings = tracingSettings
-  ) dependsOn core
+//  lazy val tracing = Project(
+//    "querulous-tracing", file("querulous-tracing"),
+//    settings = tracingSettings
+//  ) dependsOn core
 
 
-  lazy val standardSettings = Defaults.defaultSettings ++ Seq(
+  lazy val rootSettings = Defaults.defaultSettings ++ Seq(
     organization  := "com.twitter",
     version       := "2.3.14",
     scalaVersion  := "2.9.1",
@@ -30,7 +30,7 @@ object QuerulousBuild extends Build {
     )
   )
 
-  lazy val coreSettings = standardSettings ++ Seq(
+  lazy val coreSettings = rootSettings ++ Seq(
     resolvers += "twitter.com" at "http://maven.twttr.com/",
 
     libraryDependencies ++= Seq(
@@ -51,7 +51,7 @@ object QuerulousBuild extends Build {
     )
   )
 
-  lazy val tracingSettings = coreSettings ++ Seq(
-    libraryDependencies += "com.twitter"  % "finagle-core"         % "1.9.0"
-  )
+//  lazy val tracingSettings = coreSettings ++ Seq(
+//    libraryDependencies += "com.twitter"  % "finagle-core"         % "1.9.0"
+//  )
 }
